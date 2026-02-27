@@ -32,7 +32,8 @@
                 var(--bg);
     color:var(--ink);
   }
-  .wrap{max-width:1100px;margin:34px auto;padding:16px;}
+  .wrap{max-width:980px;margin:34px auto;padding:16px;}
+
   .header{
     display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-end;
     margin-bottom:14px;
@@ -58,9 +59,6 @@
   .btn.ghost{background:#fff;color:var(--primary);box-shadow:none}
   .btn.blue{background:var(--primary2);border-color:transparent}
   .btn.red{background:var(--danger);border-color:transparent}
-
-  .grid{display:grid;grid-template-columns: 1.1fr .9fr; gap:14px;}
-  @media (max-width:980px){ .grid{grid-template-columns:1fr;} }
 
   .card{
     background:var(--card);
@@ -216,7 +214,7 @@
   .offerActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
   .fine{margin-top:10px;color:var(--muted);font-size:11px;line-height:1.5;}
 
-  /* 페이지 전환 */
+  /* pages */
   .page{display:none;}
   .page.active{display:block;}
 
@@ -239,7 +237,7 @@
       <h1>예비창업패키지 모의 심사 시뮬레이터</h1>
       <div class="sub">
         심사위원은 “근거”를 봅니다. (없음/부분/충족 3단계)<br/>
-        “부분”은 <b>문장만 있고 수치·표·증빙이 약한 상태</b>입니다.
+        “부분”은 <b>근거가 일부는 있지만</b> 제출 기준에 맞게 보완이 필요한 상태입니다.
       </div>
     </div>
     <div class="actions" id="topActions">
@@ -247,90 +245,75 @@
     </div>
   </div>
 
-  <!-- PAGE 1: DIAGNOSIS -->
+  <!-- PAGE 1 -->
   <section id="pageDiagnosis" class="page active">
-    <div class="grid">
-      <div class="card">
-        <h2>진단 입력</h2>
-        <div class="muted">각 문항은 “증빙 가능 여부” 기준으로 선택하세요. (없음=0 / 부분=0.5 / 충족=1)</div>
-        <div id="groups"></div>
+    <div class="card">
+      <h2>진단 입력</h2>
+      <div class="muted">각 문항은 “증빙 가능 여부” 기준으로 선택하세요. (없음=0 / 부분=0.5 / 충족=1)</div>
 
-        <div class="divider"></div>
-        <h2>가점 항목 (최대 +10)</h2>
-        <div class="muted">공고별 가점은 다릅니다. 해당되면 체크하세요.</div>
-        <div class="items" id="bonusList" style="margin-top:10px;"></div>
+      <div class="divider"></div>
 
-        <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px;">
-          <button class="btn" id="btnCalcBottom" type="button">결과 산출</button>
-        </div>
-
-        <div class="muted" style="margin-top:10px;">
-          * “부분”이 많은 상태로 제출하면 감점 위험이 큽니다.
-        </div>
+      <h2>사용법</h2>
+      <div class="note">
+        <ol style="margin:10px 0 0 18px;">
+          <li>각 항목을 ‘없음/부분/충족’으로 체크</li>
+          <li>‘부분(0.5)’을 선택하면 <b>빠진 요소(수치/증빙/구체화)</b>를 체크</li>
+          <li>맨 아래 <b>결과 산출</b>을 누르면 결과 페이지로 이동</li>
+          <li>결과 페이지에서 <b>PDF 저장</b> 가능</li>
+        </ol>
       </div>
 
-      <div class="card">
-        <h2>심사위원은 이렇게 봅니다</h2>
-        <div class="note">
-          <ul style="margin:10px 0 0 18px;">
-            <li><b>문제인식</b>: 사례+통계 없으면 “공감”이어도 점수 안 줍니다.</li>
-            <li><b>실현가능성</b>: 월 단위 로드맵+산출물 없으면 실행 불가로 봅니다.</li>
-            <li><b>성장전략</b>: 시장규모·단가·마진·고객수 연결이 없으면 전략 점수 낮습니다.</li>
-            <li><b>팀 역량</b>: “열심히”가 아니라 수행 가능성(실적/역할/협력)으로 판단합니다.</li>
-          </ul>
-        </div>
+      <div id="groups"></div>
 
-        <div class="divider"></div>
+      <div class="divider"></div>
+      <h2>가점 항목 (최대 +10)</h2>
+      <div class="muted">공고별 가점은 다릅니다. 해당되면 체크하세요.</div>
+      <div class="items" id="bonusList" style="margin-top:10px;"></div>
 
-        <h2>사용법</h2>
-        <div class="note">
-          <ol style="margin:10px 0 0 18px;">
-            <li>각 항목을 ‘없음/부분/충족’으로 체크</li>
-            <li>부분(0.5) 선택 시 “무엇이 빠졌는지” 체크</li>
-            <li>아래 <b>결과 산출</b>을 누르면 결과 페이지로 이동</li>
-            <li>결과 페이지에서 <b>PDF 저장</b> 가능</li>
-          </ol>
-        </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px;">
+        <button class="btn" id="btnCalcBottom" type="button">결과 산출</button>
+      </div>
+
+      <div class="muted" style="margin-top:10px;">
+        * “부분”이 많은 상태로 제출하면 감점 위험이 큽니다.
       </div>
     </div>
   </section>
 
-  <!-- PAGE 2: RESULT -->
+  <!-- PAGE 2 -->
   <section id="pageResult" class="page">
-    <div class="grid">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;">
-          <div>
-            <h2 style="margin-bottom:4px;">요약 결과</h2>
-            <div class="muted">점수/리스크/보완 문장 제안을 출력합니다.</div>
-          </div>
-          <div class="topOnlyHide" style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn ghost" id="btnBack" type="button">← 다시 진단</button>
-            <button class="btn red" id="btnPrint" type="button">PDF 저장</button>
-          </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+        <div>
+          <h2 style="margin-bottom:4px;">요약 결과</h2>
+          <div class="muted">점수/리스크/보완 문장 제안을 출력합니다.</div>
         </div>
-
-        <div class="divider"></div>
-
-        <div id="summary" class="note">
-          <div class="muted">아직 결과가 없습니다.</div>
+        <div class="topOnlyHide" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn ghost" id="btnBack" type="button">← 다시 진단</button>
+          <button class="btn red" id="btnPrint" type="button">PDF 저장</button>
         </div>
-
-        <div class="divider"></div>
-
-        <h2>탈락 위험 TOP3</h2>
-        <div id="top3" class="note"><div class="muted">미충족/부분 항목에서 영향도가 큰 3개를 뽑습니다.</div></div>
-
-        <div class="divider"></div>
-
-        <h2>보완 문장 자동 제안</h2>
-        <div id="fixes" class="note"><div class="muted">TOP3 + “부분에서 빠진 것”까지 반영해 자동 제안합니다.</div></div>
       </div>
 
-      <div class="card">
-        <h2>결제 유도</h2>
-        <div id="cta" class="ctaWrap"></div>
+      <div class="divider"></div>
+
+      <div id="summary" class="note">
+        <div class="muted">아직 결과가 없습니다.</div>
       </div>
+
+      <div class="divider"></div>
+
+      <h2>탈락 위험 TOP3</h2>
+      <div id="top3" class="note"><div class="muted">미충족/부분 항목에서 영향도가 큰 3개를 뽑습니다.</div></div>
+
+      <div class="divider"></div>
+
+      <h2>보완 문장 자동 제안</h2>
+      <div id="fixes" class="note"><div class="muted">TOP3 + ‘부분에서 체크한 빠진 요소’까지 반영해 자동 제안합니다.</div></div>
+
+      <div class="divider"></div>
+
+      <h2>결제 유도</h2>
+      <div id="cta" class="ctaWrap"></div>
     </div>
   </section>
 
@@ -354,14 +337,14 @@ const CONFIG = {
 
 const LEVELS = [
   { v:0,   label:"없음",  help:"근거/증빙 없음", tone:"0" },
-  { v:0.5, label:"부분",  help:"문장만 있음",   tone:"1" },
-  { v:1,   label:"충족",  help:"수치/표/증빙",   tone:"2" },
+  { v:0.5, label:"부분",  help:"근거 일부(보완 필요)", tone:"1" },
+  { v:1,   label:"충족",  help:"수치/표/증빙 완비", tone:"2" },
 ];
 
 const MISS_OPTIONS = [
-  { key:"metric",   title:"수치/산정",   desc:"시장규모·단가·기간·비용 등 정량 근거가 약함" },
+  { key:"metric",   title:"수치/산정",   desc:"시장규모·단가·기간·비용 등 정량 근거가 부족" },
   { key:"evidence", title:"증빙/출처",   desc:"인터뷰/설문/자료 링크·캡처 등 증빙이 부족" },
-  { key:"clarity",  title:"비교표/구체화", desc:"표/프로세스/화면/로드맵 등 구조화가 부족" },
+  { key:"clarity",  title:"구체화/구조", desc:"비교표/로드맵/프로세스/화면 등 구조화가 부족" },
 ];
 
 const GROUPS = [
@@ -424,7 +407,7 @@ const BONUS = [
   { id:"b4", pts:3, title:"사전 검증 문서(인터뷰/파일럿/LOI)", desc:"요약+증빙이 있어야 함" },
 ];
 
-const STORAGE_KEY_STATE = "prestartup_eval_state_clean_v1";
+const STORAGE_KEY_STATE = "prestartup_eval_state_single_v1";
 
 /** helpers */
 function esc(s){
@@ -456,7 +439,7 @@ function renderItem(it){
       </div>
 
       <div class="partialBox" data-partial="${it.id}">
-        <div class="ptitle">부분인 이유(빠진 것)를 체크하세요</div>
+        <div class="ptitle">‘부분’인 이유(빠진 요소)를 체크하세요</div>
         <div class="missGrid">
           ${MISS_OPTIONS.map(m=>`
             <label class="miss">
@@ -580,7 +563,6 @@ function bindHandlers(){
   });
 
   document.getElementById("btnBack").addEventListener("click", ()=>goTo("diagnosis"));
-
   document.getElementById("btnPrint").addEventListener("click", ()=>window.print());
 
   document.getElementById("btnReset").addEventListener("click", ()=>{
@@ -600,7 +582,7 @@ function bindHandlers(){
 }
 
 function togglePartialBox(qid, value, keepChecks){
-  const box = document.querySelector(`.partialBox[data-partial="${qid}"]`);
+  const box = document.querySelector(\`.partialBox[data-partial="\${qid}"]\`);
   if(!box) return;
   if(value === 0.5){
     box.style.display = "";
@@ -652,8 +634,7 @@ function dedupTop(list, n){
   const out = [];
   const used = new Set();
   for(const r of list){
-    const base = r.id.replace(/-(metric|evidence|clarity)$/,"");
-    const key = r.id.includes("-") ? r.id : base;
+    const key = r.id.replace(/-(metric|evidence|clarity)$/,"");
     if(used.has(key)) continue;
     used.add(key);
     out.push(r);
@@ -686,24 +667,24 @@ function calc(){
           if(m.metric){
             riskPool.push({
               group:g.name, id:it.id+"-metric",
-              title:`(부분) 수치/산정 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘수치/산정(시장·단가·기간·비용)’ 근거를 보강하십시오.`,
+              title:\`(부분) 수치/산정 보완 필요 · \${it.title}\`,
+              fix:\`\${it.fix} 특히 ‘수치/산정(시장·단가·기간·비용)’ 근거를 보강하십시오.\`,
               impact: (0.5 * it.w / sumW) * g.max
             });
           }
           if(m.evidence){
             riskPool.push({
               group:g.name, id:it.id+"-evidence",
-              title:`(부분) 증빙/출처 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘증빙/출처(인터뷰/설문/자료 링크·캡처)’를 추가하십시오.`,
+              title:\`(부분) 증빙/출처 보완 필요 · \${it.title}\`,
+              fix:\`\${it.fix} 특히 ‘증빙/출처(인터뷰/설문/자료 링크·캡처)’를 추가하십시오.\`,
               impact: (0.5 * it.w / sumW) * g.max
             });
           }
           if(m.clarity){
             riskPool.push({
               group:g.name, id:it.id+"-clarity",
-              title:`(부분) 비교표/구체화 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘비교표/프로세스/화면/로드맵’으로 구조화하십시오.`,
+              title:\`(부분) 구체화/구조 보완 필요 · \${it.title}\`,
+              fix:\`\${it.fix} 특히 ‘비교표/프로세스/화면/로드맵’으로 구조화하십시오.\`,
               impact: (0.5 * it.w / sumW) * g.max
             });
           }
@@ -717,9 +698,7 @@ function calc(){
   });
 
   let bonusPts = 0;
-  BONUS.forEach(b=>{
-    if(st.bonus[b.id]) bonusPts += b.pts;
-  });
+  BONUS.forEach(b=>{ if(st.bonus[b.id]) bonusPts += b.pts; });
   if(bonusPts > BONUS_CAP) bonusPts = BONUS_CAP;
 
   const total = Math.round(baseTotal + bonusPts);
@@ -747,7 +726,6 @@ function calc(){
   return { total, probability, verdictText, verdictTone, groupScores, bonusPts, top3, fixes };
 }
 
-/** result rendering */
 function toneClass(t){ return t==="ok" ? "ok" : (t==="warn" ? "warn" : "danger"); }
 
 function buildActionPreview(res){
@@ -758,14 +736,14 @@ function buildActionPreview(res){
       out.push("시장규모·단가·마진을 ‘표 1장’으로 묶어 본문에 삽입");
     }else if(r.title.includes("증빙") || r.title.includes("출처")){
       out.push("인터뷰/설문 5건 요약 + 출처 링크 1개를 본문에 추가");
-    }else if(r.title.includes("비교표") || r.title.includes("구체화")){
-      out.push("경쟁/대안 비교표를 가격·기능·성과 3축으로 재정리");
+    }else if(r.title.includes("구체화") || r.title.includes("구조")){
+      out.push("비교표/로드맵/프로세스를 1페이지 표로 구조화");
     }else if(r.group.includes("실현")){
       out.push("6개월 로드맵을 월 단위로 쪼개고 산출물·KPI를 같이 표기");
     }else if(r.group.includes("성장")){
       out.push("매출 공식을 ‘단가×고객수×빈도’로 명시하고 가정 근거 추가");
     }else{
-      out.push("TOP3 위험 문단을 ‘근거(수치/출처/표)’ 중심으로 보완");
+      out.push("TOP3 위험 문단을 ‘근거(수치/표/증빙)’ 중심으로 보완");
     }
   }
   while(out.length<3) out.push("TOP3 위험 항목을 ‘충족’으로 올릴 증빙(수치/표/출처) 1개씩 추가");
@@ -822,7 +800,7 @@ function renderResultPage(res){
         ${res.fixes.map(f=>`<li>${esc(f)}</li>`).join("")}
       </ol>
       <div class="muted" style="margin-top:10px;">
-        문장만 붙이면 끝이 아닙니다. <b>수치/표/증빙</b>을 같이 넣어야 “충족”이 됩니다.
+        문장만 바꾸면 끝이 아닙니다. <b>수치/표/증빙</b>이 같이 있어야 “충족”입니다.
       </div>
     `;
   }
@@ -831,7 +809,7 @@ function renderResultPage(res){
   const strong = res.total <= CONFIG.CTA_STRONG_MAX_SCORE;
   const show = res.total <= CONFIG.CTA_SHOW_MAX_SCORE;
   const headline = strong ? "❗ 이 상태로는 탈락입니다. 지금 바로 보완하세요."
-                         : "보완 속도를 올리세요. 심사위원은 ‘가독성’에서 걸러냅니다.";
+                         : "보완 속도를 올리세요. 심사는 ‘가독성’에서 걸러집니다.";
 
   const previewActions = buildActionPreview(res);
 
@@ -916,7 +894,7 @@ function renderResultPage(res){
     </div>
 
     <div class="fine" style="margin-top:12px;">
-      ${show ? "" : "* 현재 점수가 높아도, ‘가독성’에서 감점이 생기는 경우가 많습니다. 필요 시 선택하세요."}
+      ${show ? "" : "* 점수가 높아도 ‘가독성/근거’에서 감점이 생길 수 있습니다. 필요 시 선택하세요."}
     </div>
   `;
 }
