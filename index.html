@@ -19,7 +19,6 @@
     --ok:#0f9d58;
     --warn:#b45309;
 
-    --chip:#0b1220;
     --shadow: 0 10px 30px rgba(2,6,23,.08);
     --radius:14px;
   }
@@ -41,6 +40,7 @@
   .title h1{margin:0;font-size:26px;font-weight:950;letter-spacing:-.3px}
   .title .sub{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.45}
   .actions{display:flex;gap:10px;flex-wrap:wrap}
+
   .btn{
     border:1px solid var(--border);
     background:var(--primary);
@@ -52,46 +52,12 @@
     letter-spacing:-.2px;
     box-shadow: 0 8px 20px rgba(31,58,95,.15);
     text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
   }
   .btn:hover{opacity:.92}
-  .btn.ghost{
-    background:#fff;color:var(--primary);
-    box-shadow:none;
-  }
-  .btn.red{background:var(--danger);border-color:transparent}
+  .btn.ghost{background:#fff;color:var(--primary);box-shadow:none}
   .btn.blue{background:var(--primary2);border-color:transparent}
-
-  .tabs{
-    display:flex;gap:10px;flex-wrap:wrap;
-    margin:14px 0 16px 0;
-  }
-  .tab{
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.85);
-    padding:10px 12px;
-    border-radius:999px;
-    cursor:pointer;
-    font-weight:900;
-    color:var(--primary);
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .tab.active{
-    background:var(--primary);
-    color:#fff;
-    border-color:transparent;
-  }
-  .pill{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:7px 10px;border-radius:999px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.75);
-    color:var(--primary);
-    font-size:12px;font-weight:900;
-  }
+  .btn.red{background:var(--danger);border-color:transparent}
 
   .grid{display:grid;grid-template-columns: 1.1fr .9fr; gap:14px;}
   @media (max-width:980px){ .grid{grid-template-columns:1fr;} }
@@ -128,17 +94,8 @@
     padding:12px;
     background: linear-gradient(180deg, rgba(31,58,95,.03), transparent 55%);
   }
-  .itemTop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .itemTitle{font-weight:950;font-size:13px;line-height:1.3}
   .itemDesc{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.4}
-  .wChip{
-    font-size:12px;font-weight:950;
-    background:var(--chip);
-    color:#fff;
-    padding:5px 9px;
-    border-radius:999px;
-    white-space:nowrap;
-  }
 
   .scale{
     margin-top:10px;
@@ -163,6 +120,36 @@
   .opt[data-tone="2"]{background:rgba(15,157,88,.08)}
   .opt.active{outline:2px solid rgba(43,90,166,.25)}
 
+  .partialBox{
+    display:none;
+    margin-top:10px;
+    padding:12px;
+    border:1px dashed rgba(31,58,95,.28);
+    background:rgba(43,90,166,.05);
+    border-radius:14px;
+  }
+  .partialBox .ptitle{
+    font-weight:1000;color:var(--primary);font-size:12px;margin-bottom:8px;
+  }
+  .missGrid{
+    display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:8px;
+  }
+  @media (max-width:980px){ .missGrid{grid-template-columns:1fr;} }
+  .miss{
+    border:1px solid var(--border);border-radius:12px;padding:10px;background:#fff;
+    cursor:pointer;display:flex;gap:10px;align-items:flex-start;
+  }
+  .miss input{transform:scale(1.05);margin-top:2px;}
+  .miss b{font-size:12px;}
+  .miss small{display:block;color:var(--muted);font-weight:800;margin-top:2px;line-height:1.35;}
+
+  .note{
+    border:1px dashed rgba(31,58,95,.25);
+    background:rgba(255,255,255,.65);
+    border-radius:14px;
+    padding:12px;
+  }
+
   .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
   @media (max-width:980px){ .kpis{grid-template-columns:1fr;} }
   .kpi{
@@ -179,67 +166,12 @@
   .ok{color:var(--ok)}
   .warn{color:var(--warn)}
 
-  .note{
-    border:1px dashed rgba(31,58,95,.25);
-    background:rgba(255,255,255,.65);
-    border-radius:14px;
-    padding:12px;
-  }
-
   table{width:100%;border-collapse:collapse}
   th,td{border-bottom:1px solid var(--border);padding:10px 8px;font-size:12px;vertical-align:top}
   th{color:var(--muted);text-align:left;font-weight:950}
   td b{color:var(--primary)}
 
-  .rightActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-  .badge{
-    display:inline-block;
-    padding:4px 8px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:1000;
-    border:1px solid var(--border);
-    background:#fff;
-  }
-
-  /* 부분일 때 2차 질문 */
-  .partialBox{
-    display:none;
-    margin-top:10px;
-    padding:12px;
-    border:1px dashed rgba(31,58,95,.28);
-    background:rgba(43,90,166,.05);
-    border-radius:14px;
-  }
-  .partialBox .ptitle{
-    font-weight:1000;
-    color:var(--primary);
-    font-size:12px;
-    margin-bottom:8px;
-  }
-  .missGrid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0,1fr));
-    gap:8px;
-  }
-  @media (max-width:980px){
-    .missGrid{ grid-template-columns:1fr; }
-  }
-  .miss{
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:10px;
-    background:#fff;
-    cursor:pointer;
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-  }
-  .miss input{ transform:scale(1.05); margin-top:2px; }
-  .miss b{ font-size:12px; }
-  .miss small{ display:block; color:var(--muted); font-weight:800; margin-top:2px; line-height:1.35; }
-
-  /* 유료 CTA */
+  /* 결제 유도 */
   .ctaWrap{
     margin-top:14px;
     padding:14px;
@@ -249,17 +181,10 @@
                 radial-gradient(700px 250px at 90% 0%, rgba(31,58,95,.10), transparent 55%),
                 rgba(255,255,255,.75);
   }
-  .ctaHead{
-    display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;
-  }
+  .ctaHead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;}
   .ctaTitle{font-weight:1100;font-size:14px;color:var(--primary)}
   .ctaSub{color:var(--muted);font-size:12px;line-height:1.5;margin-top:6px}
-  .ctaGrid{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:12px;
-    margin-top:12px;
-  }
+  .ctaGrid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin-top:12px;}
   @media (max-width:980px){ .ctaGrid{grid-template-columns:1fr;} }
   .offer{
     border:1px solid var(--border);
@@ -287,24 +212,18 @@
     padding:10px;
   }
   .miniPreview b{display:block;margin-bottom:6px;font-size:12px}
-  .miniPreview .blur{
-    filter: blur(3px);
-    opacity:.8;
-    user-select:none;
-  }
+  .miniPreview .blur{filter: blur(3px);opacity:.8;user-select:none;}
   .offerActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .fine{margin-top:10px;color:var(--muted);font-size:11px;line-height:1.5;}
 
-  .fine{
-    margin-top:10px;
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.5;
-  }
+  /* 페이지 전환 */
+  .page{display:none;}
+  .page.active{display:block;}
 
-  /* PRINT */
+  /* print */
   @media print{
     body{background:#fff}
-    .actions,.tabs,#leftPane,#recordPane .rightActions{display:none!important;}
+    .topOnlyHide{display:none!important;}
     .wrap{max-width:none;margin:0;padding:0}
     .card{border:0;box-shadow:none;border-radius:0}
     .ctaWrap{display:none!important;}
@@ -315,55 +234,81 @@
 <body>
 <div class="wrap">
 
-  <div class="header">
+  <div class="header topOnlyHide">
     <div class="title">
       <h1>예비창업패키지 모의 심사 시뮬레이터</h1>
       <div class="sub">
-        감으로 쓰지 마세요. <b>심사위원은 근거</b>를 봅니다. (없음/부분/충족 3단계)<br/>
-        “부분”은 <b>문장만 있고 증빙·수치·표가 약한 상태</b>를 의미합니다.
+        심사위원은 “근거”를 봅니다. (없음/부분/충족 3단계)<br/>
+        “부분”은 <b>문장만 있고 수치·표·증빙이 약한 상태</b>입니다.
       </div>
     </div>
-    <div class="actions">
-      <span class="pill">모드: 3단계 + 부분 2차질문</span>
+    <div class="actions" id="topActions">
       <button class="btn ghost" id="btnReset" type="button">초기화</button>
-      <button class="btn" id="btnCalc" type="button">결과 산출</button>
-      <button class="btn red" id="btnPrint" type="button">PDF 저장</button>
     </div>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="diagnosis">1) 진단</button>
-    <button class="tab" data-tab="record">2) 기록</button>
-    <button class="tab" data-tab="report">3) 리포트</button>
-  </div>
-
-  <!-- 진단 -->
-  <section id="diagnosisPane">
+  <!-- PAGE 1: DIAGNOSIS -->
+  <section id="pageDiagnosis" class="page active">
     <div class="grid">
-      <div class="card" id="leftPane">
+      <div class="card">
         <h2>진단 입력</h2>
-        <div class="muted">각 문항은 “증빙 가능 여부” 기준으로 고르세요. (없음=0 / 부분=0.5 / 충족=1)</div>
-
+        <div class="muted">각 문항은 “증빙 가능 여부” 기준으로 선택하세요. (없음=0 / 부분=0.5 / 충족=1)</div>
         <div id="groups"></div>
 
         <div class="divider"></div>
-
         <h2>가점 항목 (최대 +10)</h2>
-        <div class="muted">공고별 가점은 다릅니다. 여기서는 보수적으로 캡을 둡니다.</div>
+        <div class="muted">공고별 가점은 다릅니다. 해당되면 체크하세요.</div>
         <div class="items" id="bonusList" style="margin-top:10px;"></div>
 
-        <div class="rightActions">
-          <button class="btn" type="button" id="btnCalc2">결과 산출</button>
-          <button class="btn ghost" type="button" id="btnSaveRun">이번 결과 기록 저장</button>
+        <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px;">
+          <button class="btn" id="btnCalcBottom" type="button">결과 산출</button>
         </div>
+
         <div class="muted" style="margin-top:10px;">
-          Tip: “부분”이 많으면 실제 심사에서 감점이 큽니다. <b>빠진 것(수치/증빙/구체화)</b>부터 채우세요.
+          * “부분”이 많은 상태로 제출하면 감점 위험이 큽니다.
         </div>
       </div>
 
       <div class="card">
-        <h2>요약 결과</h2>
-        <div class="muted">왼쪽 입력 후 “결과 산출”을 누르세요.</div>
+        <h2>심사위원은 이렇게 봅니다</h2>
+        <div class="note">
+          <ul style="margin:10px 0 0 18px;">
+            <li><b>문제인식</b>: 사례+통계 없으면 “공감”이어도 점수 안 줍니다.</li>
+            <li><b>실현가능성</b>: 월 단위 로드맵+산출물 없으면 실행 불가로 봅니다.</li>
+            <li><b>성장전략</b>: 시장규모·단가·마진·고객수 연결이 없으면 전략 점수 낮습니다.</li>
+            <li><b>팀 역량</b>: “열심히”가 아니라 수행 가능성(실적/역할/협력)으로 판단합니다.</li>
+          </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>사용법</h2>
+        <div class="note">
+          <ol style="margin:10px 0 0 18px;">
+            <li>각 항목을 ‘없음/부분/충족’으로 체크</li>
+            <li>부분(0.5) 선택 시 “무엇이 빠졌는지” 체크</li>
+            <li>아래 <b>결과 산출</b>을 누르면 결과 페이지로 이동</li>
+            <li>결과 페이지에서 <b>PDF 저장</b> 가능</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2: RESULT -->
+  <section id="pageResult" class="page">
+    <div class="grid">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+          <div>
+            <h2 style="margin-bottom:4px;">요약 결과</h2>
+            <div class="muted">점수/리스크/보완 문장 제안을 출력합니다.</div>
+          </div>
+          <div class="topOnlyHide" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn ghost" id="btnBack" type="button">← 다시 진단</button>
+            <button class="btn red" id="btnPrint" type="button">PDF 저장</button>
+          </div>
+        </div>
 
         <div class="divider"></div>
 
@@ -380,54 +325,11 @@
 
         <h2>보완 문장 자동 제안</h2>
         <div id="fixes" class="note"><div class="muted">TOP3 + “부분에서 빠진 것”까지 반영해 자동 제안합니다.</div></div>
-
-        <!-- ✅ 유료 CTA -->
-        <div id="cta" class="ctaWrap" style="display:none;"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 기록 -->
-  <section id="recordPane" style="display:none;">
-    <div class="card">
-      <h2>진단 기록</h2>
-      <div class="muted">“이번 결과 기록 저장”을 누른 기록이 여기에 쌓입니다. (브라우저에만 저장)</div>
-
-      <div class="rightActions">
-        <button class="btn ghost" type="button" id="btnExportCsv">CSV 다운로드</button>
-        <button class="btn ghost" type="button" id="btnClearRuns">기록 전체 삭제</button>
       </div>
 
-      <div class="divider"></div>
-
-      <div id="runsTable" class="note">
-        <div class="muted">기록이 없습니다.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 리포트 -->
-  <section id="reportPane" style="display:none;">
-    <div class="card">
-      <h2>리포트 (PDF용)</h2>
-      <div class="muted">현재 입력값 기준으로 리포트를 출력합니다. 우측 상단 “PDF 저장” 버튼으로 저장하세요.</div>
-
-      <div class="divider"></div>
-
-      <div id="report" class="note">
-        <div class="muted">아직 결과가 없습니다. 먼저 “결과 산출”을 하세요.</div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="note">
-        <b>심사위원은 이렇게 봅니다.</b>
-        <ul style="margin:10px 0 0 18px;">
-          <li>문제인식: 사례+통계 없으면 “공감”이어도 점수 안 줍니다.</li>
-          <li>실현가능성: 월 단위 로드맵+산출물 없으면 실행 불가로 봅니다.</li>
-          <li>성장전략: 시장규모·단가·마진·고객수 연결이 없으면 전략 점수 낮습니다.</li>
-          <li>팀역량: “열심히”가 아니라 수행 가능성(실적/역할/협력)으로 판단합니다.</li>
-        </ul>
+      <div class="card">
+        <h2>결제 유도</h2>
+        <div id="cta" class="ctaWrap"></div>
       </div>
     </div>
   </section>
@@ -436,25 +338,18 @@
 
 <script>
 /** =========================
- *  CONFIG (링크만 바꿔서 운영)
+ *  CONFIG (오픈카톡 링크만 바꾸면 됨)
  *  ========================= */
 const CONFIG = {
   ACTION_PRICE: "5,000원",
   EDIT_PRICE: "65,000원",
 
-  // ✅ 여기만 너 링크로 바꾸면 됨
-  ACTION_PAY_URL: "https://example.com/pay-actionlist",
-  EDIT_APPLY_URL: "https://example.com/apply-edit",
+  // ✅ 너 링크로 교체
+  OPEN_KAKAO_ACTION_URL: "https://open.kakao.com/o/XXXXXXX",
+  OPEN_KAKAO_EDIT_URL: "https://open.kakao.com/o/YYYYYYY",
 
-  // CTA 노출 기준(점수 낮을수록 더 강하게 띄움)
-  CTA_SHOW_MAX_SCORE: 78,
-
-  // 문구
-  BRAND_TONE: {
-    header1: "감으로 쓰지 마세요.",
-    header2: "이 상태로는 탈락입니다.",
-    header3: "심사위원은 이렇게 봅니다."
-  }
+  CTA_STRONG_MAX_SCORE: 72,
+  CTA_SHOW_MAX_SCORE: 85
 };
 
 const LEVELS = [
@@ -529,76 +424,26 @@ const BONUS = [
   { id:"b4", pts:3, title:"사전 검증 문서(인터뷰/파일럿/LOI)", desc:"요약+증빙이 있어야 함" },
 ];
 
-const STORAGE_KEY_STATE = "prestartup_eval_state_v4";
-const STORAGE_KEY_RUNS  = "prestartup_eval_runs_v4";
+const STORAGE_KEY_STATE = "prestartup_eval_state_clean_v1";
 
-/** ---------- UI 렌더 ---------- */
-const groupsEl = document.getElementById("groups");
-const bonusEl  = document.getElementById("bonusList");
-
+/** helpers */
 function esc(s){
   return String(s??"").replace(/[&<>"']/g, m => ({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[m]));
 }
+function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
 
-function render(){
-  groupsEl.innerHTML = "";
-  GROUPS.forEach(g=>{
-    const group = document.createElement("div");
-    group.className = "group";
-    group.innerHTML = `
-      <div class="groupHead">
-        <div class="name">${esc(g.name)}</div>
-        <div class="meta">최대 ${g.max}점 · 중요도 가중치 · 부분 2차질문</div>
-      </div>
-      <div class="items">
-        ${g.items.map(it => renderItem(it)).join("")}
-      </div>
-    `;
-    groupsEl.appendChild(group);
-  });
-
-  bonusEl.innerHTML = BONUS.map(b => `
-    <label class="item" style="cursor:pointer;">
-      <div class="itemTop">
-        <div>
-          <div class="itemTitle">${esc(b.title)}</div>
-          <div class="itemDesc">${esc(b.desc)}</div>
-        </div>
-        <div class="wChip">+${b.pts}</div>
-      </div>
-      <div class="scale">
-        <label class="opt" data-tone="2">
-          <input type="checkbox" data-bonus="${b.id}">
-          <span>적용</span> <small>(+${b.pts})</small>
-        </label>
-        <div class="opt" data-tone="0" style="cursor:default;opacity:.75">
-          <span>상한</span> <small>(최대 +10)</small>
-        </div>
-        <div class="opt" data-tone="0" style="cursor:default;opacity:.75">
-          <span>주의</span> <small>(공고 확인)</small>
-        </div>
-      </div>
-    </label>
-  `).join("");
-
-  restoreState();
-  bindHandlers();
-  applyActiveStyles();
-  renderRunsTable();
-}
+const groupsEl = document.getElementById("groups");
+const bonusEl  = document.getElementById("bonusList");
 
 function renderItem(it){
   const name = `q_${it.id}`;
   return `
     <div class="item" data-item="${it.id}">
-      <div class="itemTop">
-        <div>
-          <div class="itemTitle">${esc(it.title)}</div>
-          <div class="itemDesc">${esc(it.desc)}</div>
-        </div>
-        <div class="wChip">중요도 ${it.w}</div>
+      <div>
+        <div class="itemTitle">${esc(it.title)}</div>
+        <div class="itemDesc">${esc(it.desc)}</div>
       </div>
 
       <div class="scale" data-scale="${it.id}">
@@ -628,7 +473,42 @@ function renderItem(it){
   `;
 }
 
-/** ---------- 상태 저장 ---------- */
+function render(){
+  groupsEl.innerHTML = "";
+  GROUPS.forEach(g=>{
+    const group = document.createElement("div");
+    group.className = "group";
+    group.innerHTML = `
+      <div class="groupHead">
+        <div class="name">${esc(g.name)}</div>
+        <div class="meta">최대 ${g.max}점</div>
+      </div>
+      <div class="items">${g.items.map(it=>renderItem(it)).join("")}</div>
+    `;
+    groupsEl.appendChild(group);
+  });
+
+  bonusEl.innerHTML = BONUS.map(b => `
+    <label class="item" style="cursor:pointer;">
+      <div>
+        <div class="itemTitle">${esc(b.title)} (+${b.pts})</div>
+        <div class="itemDesc">${esc(b.desc)}</div>
+      </div>
+      <div class="scale" style="grid-template-columns: 1fr;">
+        <label class="opt" data-tone="2">
+          <input type="checkbox" data-bonus="${b.id}">
+          <span>적용</span> <small>(가점)</small>
+        </label>
+      </div>
+    </label>
+  `).join("");
+
+  restoreState();
+  bindHandlers();
+  applyActiveStyles();
+}
+
+/** state */
 function getState(){
   const answers = {};
   document.querySelectorAll('input[type="radio"][data-q]').forEach(r=>{
@@ -649,11 +529,9 @@ function getState(){
 
   return { answers, bonus, misses };
 }
-
 function saveState(){
   localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(getState()));
 }
-
 function restoreState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY_STATE);
@@ -666,15 +544,11 @@ function restoreState(){
         r.checked = (Number(r.value) === Number(st.answers[q]));
       }
     });
-
     document.querySelectorAll('input[type="checkbox"][data-bonus]').forEach(cb=>{
       cb.checked = !!st.bonus?.[cb.dataset.bonus];
     });
-
     document.querySelectorAll('input[type="checkbox"][data-qmiss]').forEach(cb=>{
-      const qid = cb.dataset.qmiss;
-      const key = cb.dataset.miss;
-      cb.checked = !!st.misses?.[qid]?.[key];
+      cb.checked = !!st.misses?.[cb.dataset.qmiss]?.[cb.dataset.miss];
     });
 
     Object.entries(st.answers || {}).forEach(([qid, val])=>{
@@ -683,7 +557,7 @@ function restoreState(){
   }catch{}
 }
 
-/** ---------- 이벤트 ---------- */
+/** handlers */
 function bindHandlers(){
   document.querySelectorAll('input[type="radio"][data-q]').forEach(r=>{
     r.addEventListener("change", ()=>{
@@ -692,65 +566,36 @@ function bindHandlers(){
       applyActiveStyles();
     });
   });
-
   document.querySelectorAll('input[type="checkbox"][data-qmiss]').forEach(cb=>{
     cb.addEventListener("change", saveState);
   });
-
   document.querySelectorAll('input[type="checkbox"][data-bonus]').forEach(cb=>{
     cb.addEventListener("change", saveState);
   });
 
-  document.getElementById("btnCalc").addEventListener("click", calcAndRenderAll);
-  document.getElementById("btnCalc2").addEventListener("click", calcAndRenderAll);
-  document.getElementById("btnPrint").addEventListener("click", ()=>{
-    calcAndRenderAll();
-    window.print();
+  document.getElementById("btnCalcBottom").addEventListener("click", ()=>{
+    const res = calc();
+    renderResultPage(res);
+    goTo("result");
   });
 
-  document.getElementById("btnReset").addEventListener("click", ()=>{
-    if(confirm("초기화할까요? (입력값만 초기화, 기록은 유지)")){
-      localStorage.removeItem(STORAGE_KEY_STATE);
+  document.getElementById("btnBack").addEventListener("click", ()=>goTo("diagnosis"));
 
+  document.getElementById("btnPrint").addEventListener("click", ()=>window.print());
+
+  document.getElementById("btnReset").addEventListener("click", ()=>{
+    if(confirm("초기화할까요?")){
+      localStorage.removeItem(STORAGE_KEY_STATE);
       document.querySelectorAll('input[type="radio"][data-q]').forEach(r=>{
         if(Number(r.value)===0) r.checked = true;
       });
-
       document.querySelectorAll('input[type="checkbox"][data-bonus]').forEach(cb=>cb.checked=false);
       document.querySelectorAll('input[type="checkbox"][data-qmiss]').forEach(cb=>cb.checked=false);
       document.querySelectorAll('.partialBox').forEach(b=>b.style.display="none");
-
       applyActiveStyles();
       saveState();
-      resetOutputs();
       alert("초기화 완료");
     }
-  });
-
-  document.getElementById("btnSaveRun").addEventListener("click", ()=>{
-    const res = calc();
-    saveRun(res);
-    renderRunsTable();
-    alert("기록에 저장했습니다.");
-  });
-
-  document.getElementById("btnExportCsv").addEventListener("click", exportRunsCsv);
-  document.getElementById("btnClearRuns").addEventListener("click", ()=>{
-    if(confirm("기록을 전체 삭제할까요?")){
-      localStorage.removeItem(STORAGE_KEY_RUNS);
-      renderRunsTable();
-    }
-  });
-
-  document.querySelectorAll(".tab").forEach(t=>{
-    t.addEventListener("click", ()=>{
-      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-      t.classList.add("active");
-      const key = t.dataset.tab;
-      document.getElementById("diagnosisPane").style.display = key==="diagnosis" ? "" : "none";
-      document.getElementById("recordPane").style.display    = key==="record" ? "" : "none";
-      document.getElementById("reportPane").style.display    = key==="report" ? "" : "none";
-    });
   });
 }
 
@@ -778,23 +623,49 @@ function applyActiveStyles(){
   });
 }
 
-function resetOutputs(){
-  document.getElementById("summary").innerHTML = `<div class="muted">아직 결과가 없습니다.</div>`;
-  document.getElementById("top3").innerHTML = `<div class="muted">미충족/부분 항목에서 영향도가 큰 3개를 뽑습니다.</div>`;
-  document.getElementById("fixes").innerHTML = `<div class="muted">TOP3 + “부분에서 빠진 것”까지 반영해 자동 제안합니다.</div>`;
-  document.getElementById("report").innerHTML = `<div class="muted">아직 결과가 없습니다. 먼저 “결과 산출”을 하세요.</div>`;
-  const cta = document.getElementById("cta");
-  cta.style.display = "none";
-  cta.innerHTML = "";
+/** navigation */
+function goTo(which){
+  const diag = document.getElementById("pageDiagnosis");
+  const res  = document.getElementById("pageResult");
+  if(which==="result"){
+    diag.classList.remove("active");
+    res.classList.add("active");
+    window.scrollTo({top:0, behavior:"instant"});
+  }else{
+    res.classList.remove("active");
+    diag.classList.add("active");
+    window.scrollTo({top:0, behavior:"instant"});
+  }
 }
 
-/** ---------- 점수 계산 ---------- */
+/** scoring */
+function mapProbability(total){
+  if(total <= 40) return clamp(Math.round(5 + (total/40)*10), 3, 95);
+  if(total <= 50) return clamp(Math.round(15 + ((total-40)/10)*5), 3, 95);
+  if(total <= 70) return clamp(Math.round(20 + ((total-50)/20)*35), 3, 95);
+  if(total <= 85) return clamp(Math.round(55 + ((total-70)/15)*25), 3, 95);
+  if(total <= 95) return clamp(Math.round(80 + ((total-85)/10)*10), 3, 95);
+  return 90;
+}
+
+function dedupTop(list, n){
+  const out = [];
+  const used = new Set();
+  for(const r of list){
+    const base = r.id.replace(/-(metric|evidence|clarity)$/,"");
+    const key = r.id.includes("-") ? r.id : base;
+    if(used.has(key)) continue;
+    used.add(key);
+    out.push(r);
+    if(out.length>=n) break;
+  }
+  return out;
+}
+
 function calc(){
   const st = getState();
   const groupScores = {};
-  const groupPcts = {};
   const riskPool = [];
-
   let baseTotal = 0;
 
   GROUPS.forEach(g=>{
@@ -813,16 +684,28 @@ function calc(){
         if(lv === 0.5){
           const m = st.misses?.[it.id] || {};
           if(m.metric){
-            riskPool.push({ group:g.name, id:it.id+"-metric", title:`(부분) 수치/산정 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘수치/산정(시장·단가·기간·비용)’ 근거를 보강하십시오.`, impact: (0.5 * it.w / sumW) * g.max });
+            riskPool.push({
+              group:g.name, id:it.id+"-metric",
+              title:`(부분) 수치/산정 부족 · ${it.title}`,
+              fix:`${it.fix} 특히 ‘수치/산정(시장·단가·기간·비용)’ 근거를 보강하십시오.`,
+              impact: (0.5 * it.w / sumW) * g.max
+            });
           }
           if(m.evidence){
-            riskPool.push({ group:g.name, id:it.id+"-evidence", title:`(부분) 증빙/출처 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘증빙/출처(인터뷰/설문/자료 링크·캡처)’를 추가하십시오.`, impact: (0.5 * it.w / sumW) * g.max });
+            riskPool.push({
+              group:g.name, id:it.id+"-evidence",
+              title:`(부분) 증빙/출처 부족 · ${it.title}`,
+              fix:`${it.fix} 특히 ‘증빙/출처(인터뷰/설문/자료 링크·캡처)’를 추가하십시오.`,
+              impact: (0.5 * it.w / sumW) * g.max
+            });
           }
           if(m.clarity){
-            riskPool.push({ group:g.name, id:it.id+"-clarity", title:`(부분) 비교표/구체화 부족 · ${it.title}`,
-              fix:`${it.fix} 특히 ‘비교표/프로세스/화면/로드맵’으로 구조화하십시오.`, impact: (0.5 * it.w / sumW) * g.max });
+            riskPool.push({
+              group:g.name, id:it.id+"-clarity",
+              title:`(부분) 비교표/구체화 부족 · ${it.title}`,
+              fix:`${it.fix} 특히 ‘비교표/프로세스/화면/로드맵’으로 구조화하십시오.`,
+              impact: (0.5 * it.w / sumW) * g.max
+            });
           }
         }
       }
@@ -830,7 +713,6 @@ function calc(){
 
     const score = (sumW === 0) ? 0 : (sum / sumW) * g.max;
     groupScores[g.key] = Math.round(score);
-    groupPcts[g.key] = Math.round((score / g.max) * 100);
     baseTotal += score;
   });
 
@@ -841,7 +723,7 @@ function calc(){
   if(bonusPts > BONUS_CAP) bonusPts = BONUS_CAP;
 
   const total = Math.round(baseTotal + bonusPts);
-  let probability = mapProbability(total);
+  const probability = mapProbability(total);
 
   let verdictText = "이 상태로는 탈락입니다.";
   let verdictTone = "danger";
@@ -862,175 +744,18 @@ function calc(){
     if(fixes.length >= 8) break;
   }
 
-  return {
-    ts: new Date().toISOString(),
-    total,
-    probability,
-    verdictText,
-    verdictTone,
-    groupScores,
-    groupPcts,
-    bonusPts,
-    top3,
-    fixes,
-  };
+  return { total, probability, verdictText, verdictTone, groupScores, bonusPts, top3, fixes };
 }
 
-function dedupTop(list, n){
-  const out = [];
-  const used = new Set();
-  for(const r of list){
-    const base = r.id.replace(/-(metric|evidence|clarity)$/,"");
-    const key = r.id.includes("-") ? r.id : base;
-    if(used.has(key)) continue;
-    used.add(key);
-    out.push(r);
-    if(out.length>=n) break;
-  }
-  return out;
-}
-
-function mapProbability(total){
-  if(total <= 40) return clamp(Math.round(5 + (total/40)*10), 3, 95);
-  if(total <= 50) return clamp(Math.round(15 + ((total-40)/10)*5), 3, 95);
-  if(total <= 70) return clamp(Math.round(20 + ((total-50)/20)*35), 3, 95);
-  if(total <= 85) return clamp(Math.round(55 + ((total-70)/15)*25), 3, 95);
-  if(total <= 95) return clamp(Math.round(80 + ((total-85)/10)*10), 3, 95);
-  return 90;
-}
-
-function calcAndRenderAll(){
-  const res = calc();
-  renderSummary(res);
-  renderReport(res);
-  renderCTA(res);  // ✅ 유료 CTA
-  saveState();
-  return res;
-}
-
-/** ---------- 유료 CTA 렌더 ---------- */
-function renderCTA(res){
-  const cta = document.getElementById("cta");
-
-  // 너무 점수 높으면 CTA 숨김(원하면 기준 조정)
-  if(res.total > CONFIG.CTA_SHOW_MAX_SCORE){
-    cta.style.display = "none";
-    cta.innerHTML = "";
-    return;
-  }
-
-  // TOP3 기반으로 “미리보기 액션” 3개 뽑기
-  const previewActions = buildActionPreview(res);
-
-  cta.style.display = "";
-  cta.innerHTML = `
-    <div class="ctaHead">
-      <div>
-        <div class="ctaTitle">❗ ${CONFIG.BRAND_TONE.header1} ${CONFIG.BRAND_TONE.header2}</div>
-        <div class="ctaSub">
-          자동 진단은 구조를 보여줍니다. <b>선정은 문장과 가독성</b>에서 갈립니다.<br/>
-          아래 2가지 중 하나를 선택하세요.
-        </div>
-      </div>
-      <span class="pill">${res.total}점 · ${res.probability}%</span>
-    </div>
-
-    <div class="ctaGrid">
-      <div class="offer">
-        <div class="offerTop">
-          <div>
-            <div class="offerName">① 탈락 회피 액션리스트 (MVP)</div>
-            <div class="muted">TOP3 기반 “지금 당장 할 일”만 뽑아드립니다. (즉시 제공)</div>
-          </div>
-          <div class="price">${CONFIG.ACTION_PRICE}</div>
-        </div>
-
-        <ul>
-          <li>72시간 보완 플랜(오늘/내일/모레)</li>
-          <li>TOP3 위험별 액션 10개</li>
-          <li>심사위원 질문 15개</li>
-          <li>“부분” 항목을 “충족”으로 올리는 체크리스트</li>
-        </ul>
-
-        <div class="miniPreview">
-          <b>미리보기 (일부)</b>
-          <div class="muted">아래는 예시입니다. 구매 시 당신의 TOP3 기준으로 맞춤 제공됩니다.</div>
-          <ol style="margin:8px 0 0 18px;">
-            ${previewActions.map(a=>`<li>${esc(a)}</li>`).join("")}
-          </ol>
-          <div class="blur" style="margin-top:10px;">
-            <div class="muted"><b>+ 나머지 7개 액션</b> · 심사위원 질문 15개 · 보완 문장 완성본</div>
-          </div>
-        </div>
-
-        <div class="offerActions">
-          <a class="btn blue" href="${esc(CONFIG.ACTION_PAY_URL)}" target="_blank" rel="noopener">액션리스트 구매</a>
-          <button class="btn ghost" type="button" id="btnCopyActionLink">링크 복사</button>
-        </div>
-
-        <div class="fine">* 결제 링크는 테스트 단계에서 외부 결제 페이지로 연결됩니다.</div>
-      </div>
-
-      <div class="offer">
-        <div class="offerTop">
-          <div>
-            <div class="offerName">② 문장 수정 + 한글 가독성 편집</div>
-            <div class="muted">이미 작성된 사업계획서를 “심사위원이 읽기 좋게” 정리합니다. (사람 개입)</div>
-          </div>
-          <div class="price">${CONFIG.EDIT_PRICE}</div>
-        </div>
-
-        <ul>
-          <li>문제인식/성장전략 중심 문장 교정(모호함 제거)</li>
-          <li>핵심 수치/근거 강조 구조 정리</li>
-          <li>표·비교표 가독성 편집(정렬/강조/통일)</li>
-          <li>감점 위험 표시(어디서 깎이는지 표시)</li>
-        </ul>
-
-        <div class="miniPreview">
-          <b>진행 전 확인(중요)</b>
-          <ul style="margin:8px 0 0 18px;">
-            <li><b>전체 리라이팅/구조 재설계는 포함되지 않습니다.</b></li>
-            <li><b>재수정은 제공하지 않습니다.</b></li>
-            <li>문서 분량/난이도에 따라 일부 구간 중심으로 진행될 수 있습니다.</li>
-          </ul>
-        </div>
-
-        <div class="offerActions">
-          <a class="btn" href="${esc(CONFIG.EDIT_APPLY_URL)}" target="_blank" rel="noopener">문장수정 신청하기</a>
-          <button class="btn ghost" type="button" id="btnCopyEditLink">링크 복사</button>
-        </div>
-
-        <div class="fine">* 신청 폼에서 파일 제출/마감일/연락처를 받는 방식이 가장 간단합니다.</div>
-      </div>
-    </div>
-  `;
-
-  // copy buttons
-  const btn1 = document.getElementById("btnCopyActionLink");
-  if(btn1){
-    btn1.onclick = async ()=>{
-      try{ await navigator.clipboard.writeText(CONFIG.ACTION_PAY_URL); alert("액션리스트 결제 링크를 복사했어요."); }
-      catch{ alert("복사 실패. 링크를 직접 드래그해서 복사해 주세요."); }
-    };
-  }
-  const btn2 = document.getElementById("btnCopyEditLink");
-  if(btn2){
-    btn2.onclick = async ()=>{
-      try{ await navigator.clipboard.writeText(CONFIG.EDIT_APPLY_URL); alert("문장수정 신청 링크를 복사했어요."); }
-      catch{ alert("복사 실패. 링크를 직접 드래그해서 복사해 주세요."); }
-    };
-  }
-}
+/** result rendering */
+function toneClass(t){ return t==="ok" ? "ok" : (t==="warn" ? "warn" : "danger"); }
 
 function buildActionPreview(res){
-  // TOP3를 기반으로 “즉시 행동” 3개 생성
-  const items = res.top3 || [];
   const out = [];
-  for(const r of items){
+  for(const r of (res.top3||[])){
     if(out.length>=3) break;
     if(r.title.includes("수치") || r.title.includes("산정")){
-      out.push("시장규모·단가·마진을 ‘표 1장’으로 묶어 제출본에 삽입");
+      out.push("시장규모·단가·마진을 ‘표 1장’으로 묶어 본문에 삽입");
     }else if(r.title.includes("증빙") || r.title.includes("출처")){
       out.push("인터뷰/설문 5건 요약 + 출처 링크 1개를 본문에 추가");
     }else if(r.title.includes("비교표") || r.title.includes("구체화")){
@@ -1040,39 +765,34 @@ function buildActionPreview(res){
     }else if(r.group.includes("성장")){
       out.push("매출 공식을 ‘단가×고객수×빈도’로 명시하고 가정 근거 추가");
     }else{
-      out.push("TOP3 위험 문단을 ‘근거(수치/출처/표)’ 중심으로 재작성");
+      out.push("TOP3 위험 문단을 ‘근거(수치/출처/표)’ 중심으로 보완");
     }
   }
   while(out.length<3) out.push("TOP3 위험 항목을 ‘충족’으로 올릴 증빙(수치/표/출처) 1개씩 추가");
   return out;
 }
 
-/** ---------- 출력 ---------- */
-function renderSummary(res){
+function renderResultPage(res){
   const summary = document.getElementById("summary");
-  const top3 = document.getElementById("top3");
-  const fixes = document.getElementById("fixes");
-
-  const toneClass = res.verdictTone === "ok" ? "ok" : (res.verdictTone==="warn" ? "warn" : "danger");
-
   summary.innerHTML = `
     <div class="big">${res.total}점</div>
-    <div class="status ${toneClass}">${esc(res.verdictText)}</div>
+    <div class="status ${toneClass(res.verdictTone)}">${esc(res.verdictText)}</div>
     <div class="muted" style="margin-top:6px;">선정 가능성 <b>${res.probability}%</b> (시뮬레이션)</div>
 
     <div class="divider"></div>
 
     <div class="kpis">
-      <div class="kpi"><div class="k">문제인식</div><div class="v">${res.groupScores.problem}/25 <span class="badge">${res.groupPcts.problem}%</span></div></div>
-      <div class="kpi"><div class="k">실현가능성</div><div class="v">${res.groupScores.feas}/30 <span class="badge">${res.groupPcts.feas}%</span></div></div>
-      <div class="kpi"><div class="k">성장전략</div><div class="v">${res.groupScores.growth}/25 <span class="badge">${res.groupPcts.growth}%</span></div></div>
-      <div class="kpi"><div class="k">팀 역량</div><div class="v">${res.groupScores.team}/20 <span class="badge">${res.groupPcts.team}%</span></div></div>
+      <div class="kpi"><div class="k">문제인식</div><div class="v">${res.groupScores.problem}/25</div></div>
+      <div class="kpi"><div class="k">실현가능성</div><div class="v">${res.groupScores.feas}/30</div></div>
+      <div class="kpi"><div class="k">성장전략</div><div class="v">${res.groupScores.growth}/25</div></div>
+      <div class="kpi"><div class="k">팀 역량</div><div class="v">${res.groupScores.team}/20</div></div>
       <div class="kpi"><div class="k">가점</div><div class="v">+${res.bonusPts}/${BONUS_CAP}</div></div>
-      <div class="kpi"><div class="k">판정 기준</div><div class="v">근거(증빙) 중심</div></div>
+      <div class="kpi"><div class="k">총점</div><div class="v">${res.total}</div></div>
     </div>
   `;
 
-  if(!res.top3.length){
+  const top3 = document.getElementById("top3");
+  if(!res.top3?.length){
     top3.innerHTML = `<div class="muted">미충족 항목이 거의 없습니다.</div>`;
   }else{
     top3.innerHTML = `
@@ -1093,7 +813,8 @@ function renderSummary(res){
     `;
   }
 
-  if(!res.fixes.length){
+  const fixes = document.getElementById("fixes");
+  if(!res.fixes?.length){
     fixes.innerHTML = `<div class="muted">보완 문장이 필요하지 않거나 대부분 충족 상태입니다.</div>`;
   }else{
     fixes.innerHTML = `
@@ -1105,151 +826,104 @@ function renderSummary(res){
       </div>
     `;
   }
-}
 
-function renderReport(res){
-  const report = document.getElementById("report");
-  const dt = new Date(res.ts);
-  const stamp = `${dt.getFullYear()}-${pad2(dt.getMonth()+1)}-${pad2(dt.getDate())} ${pad2(dt.getHours())}:${pad2(dt.getMinutes())}`;
+  const cta = document.getElementById("cta");
+  const strong = res.total <= CONFIG.CTA_STRONG_MAX_SCORE;
+  const show = res.total <= CONFIG.CTA_SHOW_MAX_SCORE;
+  const headline = strong ? "❗ 이 상태로는 탈락입니다. 지금 바로 보완하세요."
+                         : "보완 속도를 올리세요. 심사위원은 ‘가독성’에서 걸러냅니다.";
 
-  const toneClass = res.verdictTone === "ok" ? "ok" : (res.verdictTone==="warn" ? "warn" : "danger");
+  const previewActions = buildActionPreview(res);
 
-  report.innerHTML = `
-    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+  cta.innerHTML = `
+    <div class="ctaHead">
       <div>
-        <div class="muted">리포트 생성: ${stamp}</div>
-        <div class="big" style="margin-top:6px;">${res.total}점</div>
-        <div class="status ${toneClass}">${esc(res.verdictText)}</div>
-        <div class="muted" style="margin-top:6px;">선정 가능성 <b>${res.probability}%</b></div>
+        <div class="ctaTitle">${esc(headline)}</div>
+        <div class="ctaSub">
+          자동 진단은 구조를 보여줍니다. <b>선정은 문장과 가독성</b>에서 갈립니다.<br/>
+          아래 2가지 중 하나를 선택하세요.
+        </div>
       </div>
-      <div class="pill">예비창업패키지 · 모의 심사</div>
+      <span class="muted"><b>${res.total}점</b> · ${res.probability}%</span>
     </div>
 
-    <div class="divider"></div>
+    <div class="ctaGrid" style="${show ? "" : "opacity:.55; filter:grayscale(.2);"}">
+      <div class="offer">
+        <div class="offerTop">
+          <div>
+            <div class="offerName">① 지금 당장 취해야 할 액션리스트 (MVP)</div>
+            <div class="muted">TOP3 기준 “오늘 해야 할 일”만 정리해 드립니다. (자동형)</div>
+          </div>
+          <div class="price">${CONFIG.ACTION_PRICE}</div>
+        </div>
 
-    <table>
-      <thead><tr><th>항목</th><th>점수</th><th>비율</th></tr></thead>
-      <tbody>
-        <tr><td><b>문제인식</b></td><td>${res.groupScores.problem}/25</td><td>${res.groupPcts.problem}%</td></tr>
-        <tr><td><b>실현가능성</b></td><td>${res.groupScores.feas}/30</td><td>${res.groupPcts.feas}%</td></tr>
-        <tr><td><b>성장전략</b></td><td>${res.groupScores.growth}/25</td><td>${res.groupPcts.growth}%</td></tr>
-        <tr><td><b>팀 역량</b></td><td>${res.groupScores.team}/20</td><td>${res.groupPcts.team}%</td></tr>
-        <tr><td><b>가점</b></td><td>+${res.bonusPts}/${BONUS_CAP}</td><td>-</td></tr>
-      </tbody>
-    </table>
+        <ul>
+          <li>72시간 보완 플랜(오늘/내일/모레)</li>
+          <li>TOP3 기반 액션 10개</li>
+          <li>심사위원 질문 15개</li>
+          <li>‘부분 → 충족’ 체크 포인트</li>
+        </ul>
 
-    <div class="divider"></div>
+        <div class="miniPreview">
+          <b>미리보기 (3개)</b>
+          <ol style="margin:8px 0 0 18px;">
+            ${previewActions.map(a=>`<li>${esc(a)}</li>`).join("")}
+          </ol>
+          <div class="blur" style="margin-top:10px;">
+            <div class="muted"><b>+ 나머지 7개 액션</b> · 심사위원 질문 15개 · 보완문장 예시</div>
+          </div>
+        </div>
 
-    <b>탈락 위험 TOP3</b>
-    <ul style="margin:10px 0 0 18px;">
-      ${res.top3.length ? res.top3.map(r=>`<li><b>${esc(r.group)}</b> · ${esc(r.title)} <span class="muted">(감점 영향 약 ${r.impact.toFixed(1)}점)</span></li>`).join("") : `<li class="muted">TOP3 위험이 없습니다.</li>`}
-    </ul>
+        <div class="offerActions">
+          <a class="btn blue" href="${esc(CONFIG.OPEN_KAKAO_ACTION_URL)}" target="_blank" rel="noopener">
+            오픈카톡으로 구매/받기
+          </a>
+        </div>
+        <div class="fine">* 오픈카톡으로 “총점/ TOP3/ 마감일” 보내면 안내됩니다.</div>
+      </div>
 
-    <div class="divider"></div>
+      <div class="offer">
+        <div class="offerTop">
+          <div>
+            <div class="offerName">② 문장 수정 + 한글 가독성 편집</div>
+            <div class="muted">이미 작성된 사업계획서를 “심사위원이 읽기 좋게” 정리합니다.</div>
+          </div>
+          <div class="price">${CONFIG.EDIT_PRICE}</div>
+        </div>
 
-    <b>보완 문장(자동 제안)</b>
-    <ol style="margin:10px 0 0 18px;">
-      ${res.fixes.length ? res.fixes.map(f=>`<li>${esc(f)}</li>`).join("") : `<li class="muted">추가 보완 문장이 없습니다.</li>`}
-    </ol>
+        <ul>
+          <li>문장 교정(모호한 표현 제거/압축/근거 강조)</li>
+          <li>핵심 수치/근거 강조 구조 정리</li>
+          <li>표·비교표 가독성 편집(정렬/강조/통일)</li>
+          <li>감점 위험 표시(어디서 깎이는지 표시)</li>
+        </ul>
+
+        <div class="miniPreview">
+          <b>진행 전 확인</b>
+          <ul style="margin:8px 0 0 18px;">
+            <li><b>전체 리라이팅/전면 재설계는 포함되지 않습니다.</b></li>
+            <li><b>재수정은 제공하지 않습니다.</b></li>
+          </ul>
+        </div>
+
+        <div class="offerActions">
+          <a class="btn" href="${esc(CONFIG.OPEN_KAKAO_EDIT_URL)}" target="_blank" rel="noopener">
+            오픈카톡으로 신청하기
+          </a>
+        </div>
+        <div class="fine">* 오픈카톡으로 파일(한글/워드/PDF) + 마감일을 보내면 안내됩니다.</div>
+      </div>
+    </div>
+
+    <div class="fine" style="margin-top:12px;">
+      ${show ? "" : "* 현재 점수가 높아도, ‘가독성’에서 감점이 생기는 경우가 많습니다. 필요 시 선택하세요."}
+    </div>
   `;
 }
-
-/** ---------- 기록 ---------- */
-function loadRuns(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY_RUNS) || "[]"); }
-  catch{ return []; }
-}
-function saveRuns(runs){
-  localStorage.setItem(STORAGE_KEY_RUNS, JSON.stringify(runs));
-}
-function saveRun(res){
-  const runs = loadRuns();
-  runs.unshift({
-    ts: res.ts,
-    total: res.total,
-    prob: res.probability,
-    verdict: res.verdictText,
-    p: res.groupScores.problem,
-    f: res.groupScores.feas,
-    g: res.groupScores.growth,
-    t: res.groupScores.team,
-    bonus: res.bonusPts
-  });
-  saveRuns(runs.slice(0,50));
-}
-
-function renderRunsTable(){
-  const el = document.getElementById("runsTable");
-  const runs = loadRuns();
-  if(!runs.length){
-    el.innerHTML = `<div class="muted">기록이 없습니다.</div>`;
-    return;
-  }
-  el.innerHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th>일시</th>
-          <th>총점</th>
-          <th>가능성</th>
-          <th>파트 점수</th>
-          <th>판정</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${runs.map(r=>{
-          const dt = new Date(r.ts);
-          const stamp = `${dt.getFullYear()}-${pad2(dt.getMonth()+1)}-${pad2(dt.getDate())} ${pad2(dt.getHours())}:${pad2(dt.getMinutes())}`;
-          return `
-            <tr>
-              <td>${stamp}</td>
-              <td><b>${r.total}</b> <span class="muted">(+${r.bonus})</span></td>
-              <td><b>${r.prob}%</b></td>
-              <td class="muted">문제 ${r.p}/25 · 실현 ${r.f}/30 · 성장 ${r.g}/25 · 팀 ${r.t}/20</td>
-              <td>${esc(r.verdict)}</td>
-            </tr>
-          `;
-        }).join("")}
-      </tbody>
-    </table>
-  `;
-}
-
-function exportRunsCsv(){
-  const runs = loadRuns();
-  if(!runs.length){ alert("기록이 없습니다."); return; }
-
-  const headers = ["ts","total","probability","verdict","problem","feasibility","growth","team","bonus"];
-  const lines = [headers.join(",")];
-
-  for(const r of runs){
-    const row = [r.ts, r.total, r.prob, r.verdict, r.p, r.f, r.g, r.t, r.bonus].map(csvCell).join(",");
-    lines.push(row);
-  }
-
-  const blob = new Blob([lines.join("\n")], {type:"text/csv;charset=utf-8;"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "prestartup-eval-runs.csv";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-
-function csvCell(v){
-  const s = String(v ?? "");
-  if(/[,"\n]/.test(s)) return `"${s.replace(/"/g,'""')}"`;
-  return s;
-}
-
-/** ---------- util ---------- */
-function pad2(n){ return String(n).padStart(2,"0"); }
-function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
 
 /** init */
 render();
+saveState();
 </script>
 </body>
 </html>
