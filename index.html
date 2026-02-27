@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>예비창업패키지 모의 심사 시뮬레이터</title>
+
+<style>
+  :root{
+    --bg:#f6f7f9;
+    --card:#ffffff;
+    --text:#101214;
+    --sub:#6b7280;
+    --border:#e5e7eb;
+    --red:#d93025;
+    --green:#0f9d58;
+    --amber:#b45309;
+    --chip:#111827;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  .container{max-width:1020px;margin:38px auto;padding:18px;}
+  .header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px;}
+  h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-0.2px;}
+  .subtitle{margin-top:6px;color:var(--sub);font-size:14px;line-height:1.4;}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+  .btn{
+    border:1px solid var(--border);
+    background:#111;
+    color:#fff;
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:800;
+    letter-spacing:-0.1px;
+  }
+  .btn:hover{opacity:.92}
+  .btn.ghost{
+    background:#fff;color:#111;border:1px solid var(--border);
+  }
+  .btn.red{
+    background:var(--red);border-color:rgba(0,0,0,0);
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 10px;border-radius:999px;
+    border:1px solid var(--border);
+    background:#fff;
+    color:#111;
+    font-size:12px;font-weight:800;
+  }
+  .pill b{font-size:12px}
+  .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;}
+  @media (max-width:920px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+  }
+  .section-title{font-size:14px;font-weight:900;margin:0 0 10px 0;color:#111}
+  .muted{color:var(--sub);font-size:12px;line-height:1.45}
+  .kpiRow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  @media (max-width:920px){.kpiRow{grid-template-columns:1fr}}
+  .kpi{
+    border:1px solid var(--border);border-radius:12px;padding:12px;background:#fff;
+  }
+  .kpi .k{color:var(--sub);font-size:12px;font-weight:800}
+  .kpi .v{margin-top:6px;font-size:18px;font-weight:900}
+  .big{font-size:44px;font-weight:1000;letter-spacing:-1px;line-height:1}
+  .status{margin-top:10px;font-size:14px;font-weight:900}
+  .danger{color:var(--red)}
+  .safe{color:var(--green)}
+  .warn{color:var(--amber)}
+  .divider{height:1px;background:var(--border);margin:14px 0}
+  .group{margin-top:14px}
+  .groupHead{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .groupHead .name{font-weight:1000}
+  .groupHead .weight{color:var(--sub);font-size:12px;font-weight:800}
+  .checklist{display:grid;gap:8px}
+  .item{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px 12px;
+    background:#fff;
+  }
+  .item input{margin-top:2px;transform:scale(1.1)}
+  .item .t{font-weight:900;font-size:13px;line-height:1.25}
+  .item .d{color:var(--sub);font-size:12px;line-height:1.35;margin-top:3px}
+  .item .pts{
+    margin-left:auto;
+    background:#111827;
+    color:#fff;
+    border-radius:999px;
+    padding:4px 8px;
+    font-size:12px;
+    font-weight:900;
+    white-space:nowrap;
+  }
+  ul{margin:8px 0 0 18px}
+  li{margin:6px 0;font-size:13px;line-height:1.35}
+  .callout{
+    background:#0b1220;
+    color:#fff;
+    border-radius:14px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .callout .title{font-weight:1000;margin-bottom:6px}
+  .callout .small{color:rgba(255,255,255,.8);font-size:12px;line-height:1.45}
+  .cta{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;
+  }
+  .note{
+    border:1px dashed rgba(17,24,39,.25);
+    background:#fafafa;border-radius:14px;padding:12px;color:#111;
+  }
+  .note .muted{margin-top:6px}
+  .footer{margin-top:12px;color:var(--sub);font-size:12px;text-align:center}
+
+  /* PRINT / PDF */
+  @media print{
+    body{background:#fff}
+    .actions, .footer, #inputCard{display:none !important;}
+    .container{margin:0;max-width:none;padding:0}
+    .grid{grid-template-columns:1fr}
+    .card{border:0;border-radius:0;box-shadow:none}
+    .pill{border:1px solid #ddd}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h1>예비창업패키지 모의 심사 시뮬레이터</h1>
+      <div class="subtitle">
+        감으로 쓰지 마세요. <b>근거 유무</b>로 계산합니다.<br/>
+        체크 = 제출서류에 <b>명시되어 있고, 증빙이 가능</b>한 상태를 의미합니다.
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill">모드: <b>체크리스트 기반</b></span>
+      <button class="btn ghost" id="btnReset" type="button">초기화</button>
+      <button class="btn red" id="btnPrint" type="button">PDF 저장</button>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- INPUT -->
+    <div class="card" id="inputCard">
+      <div class="section-title">1) 체크리스트 입력</div>
+      <div class="muted">각 항목은 “있다/없다” 기준입니다. 심사위원은 문장을 믿지 않습니다. <b>근거</b>를 봅니다.</div>
+
+      <!-- GROUPS injected -->
+      <div id="groups"></div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">가점 항목 (최대 +10점)</div>
+      <div class="muted">가점은 공고/주관기관에 따라 달라질 수 있습니다. 여기서는 “보수적 추정”으로 캡을 둡니다.</div>
+      <div class="checklist" id="bonusList" style="margin-top:10px;"></div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">2) 결과 산출</div>
+      <div class="muted">“심사 결과 확인”을 누르면 점수·확률·탈락위험·보완문장이 출력됩니다.</div>
+      <div class="cta">
+        <button class="btn" id="btnCalc" type="button">심사 결과 확인</button>
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="card" id="outputCard">
+      <div class="section-title">평가 결과 출력</div>
+      <div class="muted">선정 가능성은 “구간 기반 추정치”입니다. 실제 결과를 보장하지 않습니다.</div>
+
+      <div class="divider"></div>
+
+      <div id="scoreBlock" class="note">
+        <div class="muted">아직 결과가 없습니다. 왼쪽 체크 후 <b>심사 결과 확인</b>을 누르세요.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">탈락 위험 TOP3</div>
+      <div id="riskTop3" class="note">
+        <div class="muted">미충족 핵심 근거가 자동으로 표시됩니다.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">보완 문장 자동 제안</div>
+      <div id="fixText" class="note">
+        <div class="muted">점수가 낮은 항목 기준으로 “바로 붙여넣을 문장”을 자동 제안합니다.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="callout">
+        <div class="title">심사위원은 이렇게 봅니다.</div>
+        <div class="small">
+          ① 문제 정의는 <b>구체 사례 + 통계</b>로 증명합니다.<br/>
+          ② 실행계획은 <b>월 단위 로드맵</b>이 없으면 점수가 안 나옵니다.<br/>
+          ③ 성장전략은 <b>시장규모·단가·마진·고객수</b>로 연결해야 합니다.<br/>
+          ④ 팀역량은 “열심히 하겠다”가 아니라 <b>수행 가능성</b>으로 판단합니다.
+        </div>
+      </div>
+
+      <div class="footer">※ 본 도구는 예비창업패키지 평가 구조를 참고한 시뮬레이션입니다.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/** =========================
+ *  CONFIG (예비창업패키지)
+ *  ========================= */
+const GROUPS = [
+  {
+    key: "problem",
+    name: "문제인식",
+    max: 25,
+    items: [
+      { id:"p1", pts:5, title:"고객 문제를 구체적 사례로 설명했다", desc:"실제 상황/대상/불편을 2~3문장으로 특정(누가/언제/어디서/무엇이).", fix:"문제정의를 ‘고객/상황/불편/결과’ 구조로 2~3문장으로 재작성하십시오." },
+      { id:"p2", pts:5, title:"시장 통계 1개 이상 제시", desc:"공신력 있는 출처(정부/협회/리서치) 수치 1개 이상.", fix:"문제의 규모·시급성을 뒷받침하는 통계(출처 포함)를 1개 이상 추가하십시오." },
+      { id:"p3", pts:5, title:"기존 대안 대비 한계가 명확", desc:"경쟁/대체수단과 비교표(가격/시간/품질/불편) 1장.", fix:"기존 대안 대비 한계를 비교표(가격/시간/품질/불편)로 명확히 제시하십시오." },
+      { id:"p4", pts:5, title:"타겟 고객이 명확히 정의됨", desc:"B2C/B2B, 세그먼트 기준(연령/직군/업종/규모) 명시.", fix:"타겟 고객을 세그먼트 기준(연령/직군/업종/규모)으로 명확히 정의하십시오." },
+      { id:"p5", pts:5, title:"문제의 시급성을 수치로 설명", desc:"시간/비용/손실 등 정량지표로 ‘왜 지금’인지 제시.", fix:"고객이 겪는 비용/시간/손실을 정량화하여 ‘왜 지금 해결해야 하는지’를 제시하십시오." },
+    ]
+  },
+  {
+    key: "feas",
+    name: "실현가능성",
+    max: 30,
+    items: [
+      { id:"f1", pts:6, title:"6개월 로드맵을 ‘월 단위’로 제시", desc:"월별 목표·산출물·검증지표 포함.", fix:"6개월 로드맵을 월 단위로 쪼개고, 월별 산출물과 검증지표(KPI)를 명시하십시오." },
+      { id:"f2", pts:6, title:"MVP 범위가 명확", desc:"핵심 기능 3개 이내 + 제외 범위 명시.", fix:"MVP 핵심기능을 3개 이내로 정의하고, 제외 범위(하지 않을 것)를 명시하십시오." },
+      { id:"f3", pts:6, title:"예산 사용 계획이 구체적", desc:"인건비/외주/장비/마케팅 등 항목별 금액·근거.", fix:"예산을 항목별(인건비/외주/장비/마케팅)로 쪼개고 금액과 산정 근거를 제시하십시오." },
+      { id:"f4", pts:6, title:"개발/제작 방식과 자원 계획 명시", desc:"내재화/외주/협력, 필요한 인력·시간·툴.", fix:"개발/제작 방식을 내재화/외주/협력 중 무엇으로 할지 명시하고, 필요한 자원을 제시하십시오." },
+      { id:"f5", pts:6, title:"리스크와 대응전략 포함", desc:"기술/규제/시장/운영 리스크 3개 + 대응.", fix:"핵심 리스크 3개(기술/규제/시장)를 선정하고 각각의 대응전략을 명시하십시오." },
+    ]
+  },
+  {
+    key: "growth",
+    name: "성장전략",
+    max: 25,
+    items: [
+      { id:"g1", pts:5, title:"시장 규모(TAM/SAM 등) 제시", desc:"숫자+출처+산정 방식 간단히.", fix:"시장 규모를 TAM/SAM 또는 유사 지표로 수치화하고, 출처와 산정 방식을 제시하십시오." },
+      { id:"g2", pts:5, title:"수익 모델을 수치화", desc:"매출=단가×고객수×빈도 등 공식으로.", fix:"수익 모델을 ‘단가×고객수×빈도’ 형태의 공식으로 수치화하여 제시하십시오." },
+      { id:"g3", pts:5, title:"단가·마진 구조 설명", desc:"원가/마진/가격정책의 근거.", fix:"단가, 원가, 마진 구조를 표로 정리하고 가격정책의 근거를 제시하십시오." },
+      { id:"g4", pts:5, title:"경쟁사/대체재 분석 포함", desc:"3개 이상 비교(기능/가격/차별).", fix:"경쟁사/대체재 3개 이상을 선정해 기능·가격·차별요소 비교표를 제시하십시오." },
+      { id:"g5", pts:5, title:"차별화 요소 3개 이상 명확", desc:"‘왜 우리인가’를 3개 포인트로 고정.", fix:"차별화 요소를 3가지로 고정하고, 각 포인트의 근거(데이터/사례/기술)를 제시하십시오." },
+    ]
+  },
+  {
+    key: "team",
+    name: "팀 역량",
+    max: 20,
+    items: [
+      { id:"t1", pts:5, title:"대표자 경험이 아이템과 연결됨", desc:"경험→인사이트→해결의 연결.", fix:"대표자 경험을 아이템과 연결해 ‘왜 내가 이 문제를 풀 수 있는지’를 3문장으로 정리하십시오." },
+      { id:"t2", pts:5, title:"핵심 인력 역할이 명확", desc:"기획/개발/영업/운영 등 역할 정의.", fix:"핵심 인력의 역할(기획/개발/영업/운영)을 명확히 정의하고 책임 범위를 제시하십시오." },
+      { id:"t3", pts:5, title:"수행 실적/포트폴리오/성과 증빙", desc:"프로젝트, 수상, 매출, 고객사 등.", fix:"수행 실적(프로젝트/수상/매출/고객사)을 증빙 가능한 형태로 추가하십시오." },
+      { id:"t4", pts:5, title:"외부 자문/협력 계획 존재", desc:"멘토/파트너/기관 협력 계획.", fix:"외부 자문/협력(멘토/파트너/기관)의 역할과 기대 효과를 명시하십시오." },
+    ]
+  }
+];
+
+const BONUS_CAP = 10;
+const BONUS = [
+  { id:"b1", pts:2, title:"청년/특정 대상 가점 요건 충족(해당 시)", desc:"공고 기준 확인 필요" },
+  { id:"b2", pts:2, title:"지역/특화 분야 가점 요건 충족(해당 시)", desc:"공고 기준 확인 필요" },
+  { id:"b3", pts:3, title:"지재권/특허/출원 또는 핵심 기술 근거 보유", desc:"증빙 가능해야 함" },
+  { id:"b4", pts:3, title:"사전 검증(인터뷰/파일럿/LOI 등) 문서 보유", desc:"요약+증빙이 있어야 함" },
+];
+
+const STORAGE_KEY = "prestartup_eval_checklist_v1";
+
+/** =========================
+ *  RENDER INPUT UI
+ *  ========================= */
+const groupsEl = document.getElementById("groups");
+const bonusEl = document.getElementById("bonusList");
+
+function render(){
+  groupsEl.innerHTML = "";
+  GROUPS.forEach(g=>{
+    const wrap = document.createElement("div");
+    wrap.className = "group";
+
+    wrap.innerHTML = `
+      <div class="groupHead">
+        <div class="name">${g.name}</div>
+        <div class="weight">최대 ${g.max}점 · 체크 기반</div>
+      </div>
+      <div class="checklist">
+        ${g.items.map(it=>`
+          <label class="item">
+            <input type="checkbox" data-id="${it.id}" />
+            <div>
+              <div class="t">${escapeHtml(it.title)}</div>
+              <div class="d">${escapeHtml(it.desc)}</div>
+            </div>
+            <div class="pts">${it.pts}점</div>
+          </label>
+        `).join("")}
+      </div>
+    `;
+    groupsEl.appendChild(wrap);
+  });
+
+  bonusEl.innerHTML = BONUS.map(b=>`
+    <label class="item">
+      <input type="checkbox" data-bonus="${b.id}" />
+      <div>
+        <div class="t">${escapeHtml(b.title)}</div>
+        <div class="d">${escapeHtml(b.desc)}</div>
+      </div>
+      <div class="pts">+${b.pts}</div>
+    </label>
+  `).join("");
+
+  // restore saved
+  restoreState();
+  bindSaveHandlers();
+}
+
+function escapeHtml(s){
+  return String(s??"").replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[m]));
+}
+
+/** =========================
+ *  STATE SAVE/RESTORE
+ *  ========================= */
+function getState(){
+  const checked = {};
+  document.querySelectorAll("input[type=checkbox][data-id]").forEach(cb=>{
+    checked[cb.dataset.id] = cb.checked;
+  });
+  const bonus = {};
+  document.querySelectorAll("input[type=checkbox][data-bonus]").forEach(cb=>{
+    bonus[cb.dataset.bonus] = cb.checked;
+  });
+  return { checked, bonus };
+}
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(getState()));
+}
+function restoreState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const st = JSON.parse(raw);
+    document.querySelectorAll("input[type=checkbox][data-id]").forEach(cb=>{
+      cb.checked = !!st.checked?.[cb.dataset.id];
+    });
+    document.querySelectorAll("input[type=checkbox][data-bonus]").forEach(cb=>{
+      cb.checked = !!st.bonus?.[cb.dataset.bonus];
+    });
+  }catch{}
+}
+function bindSaveHandlers(){
+  document.querySelectorAll("input[type=checkbox]").forEach(cb=>{
+    cb.addEventListener("change", saveState);
+  });
+}
+
+/** =========================
+ *  SCORING + OUTPUT
+ *  ========================= */
+function calc(){
+  const st = getState();
+
+  // group scores
+  const groupScores = {};
+  let totalBase = 0;
+
+  const unmet = []; // for top risks (unchecked items with pts)
+  GROUPS.forEach(g=>{
+    let s = 0;
+    g.items.forEach(it=>{
+      const ok = !!st.checked[it.id];
+      if(ok) s += it.pts;
+      else unmet.push({ group:g.name, id:it.id, pts:it.pts, title:it.title, fix:it.fix });
+    });
+    groupScores[g.key] = s;
+    totalBase += s;
+  });
+
+  // bonus
+  let bonusPts = 0;
+  BONUS.forEach(b=>{
+    if(st.bonus[b.id]) bonusPts += b.pts;
+  });
+  if(bonusPts > BONUS_CAP) bonusPts = BONUS_CAP;
+
+  const total = Math.round(totalBase + bonusPts);
+
+  // probability bucket (구간)
+  let probabilityLabel = "10% 이하";
+  let verdict = { text:"이 상태로는 탈락입니다.", tone:"danger" };
+  if(total >= 80){
+    probabilityLabel = "75~90%";
+    verdict = { text:"선정 가능성 높음", tone:"safe" };
+  } else if(total >= 70){
+    probabilityLabel = "50~70%";
+    verdict = { text:"경계 구간 (보완 필요)", tone:"warn" };
+  } else if(total >= 60){
+    probabilityLabel = "30~50%";
+    verdict = { text:"탈락 가능성 높음", tone:"danger" };
+  } else {
+    probabilityLabel = "10~30%";
+    verdict = { text:"이 상태로는 탈락입니다.", tone:"danger" };
+  }
+
+  // Top3 risks: highest pts unmet first
+  unmet.sort((a,b)=>b.pts - a.pts);
+  const top3 = unmet.slice(0,3);
+
+  // fix texts: pick up to 6 suggestions (prioritize unmet highest pts, dedup by group/title)
+  const fixes = [];
+  const seen = new Set();
+  for(const u of unmet){
+    const key = u.id;
+    if(seen.has(key)) continue;
+    seen.add(key);
+    fixes.push(u.fix);
+    if(fixes.length >= 6) break;
+  }
+
+  // output blocks
+  renderOutput({ groupScores, totalBase, bonusPts, total, probabilityLabel, verdict, top3, fixes });
+}
+
+function renderOutput({ groupScores, totalBase, bonusPts, total, probabilityLabel, verdict, top3, fixes }){
+  const scoreBlock = document.getElementById("scoreBlock");
+  const riskTop3 = document.getElementById("riskTop3");
+  const fixText = document.getElementById("fixText");
+
+  const toneClass = verdict.tone === "safe" ? "safe" : (verdict.tone === "warn" ? "warn" : "danger");
+
+  scoreBlock.innerHTML = `
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <div>
+        <div class="big">${total}점</div>
+        <div class="status ${toneClass}">${verdict.text}</div>
+        <div class="muted" style="margin-top:6px;">선정 가능성: <b>${probabilityLabel}</b></div>
+      </div>
+      <div style="min-width:260px;">
+        <div class="kpiRow">
+          <div class="kpi">
+            <div class="k">문제인식</div>
+            <div class="v">${groupScores.problem}/25</div>
+          </div>
+          <div class="kpi">
+            <div class="k">실현가능성</div>
+            <div class="v">${groupScores.feas}/30</div>
+          </div>
+          <div class="kpi">
+            <div class="k">성장전략</div>
+            <div class="v">${groupScores.growth}/25</div>
+          </div>
+        </div>
+        <div class="kpiRow" style="margin-top:10px;">
+          <div class="kpi">
+            <div class="k">팀 역량</div>
+            <div class="v">${groupScores.team}/20</div>
+          </div>
+          <div class="kpi">
+            <div class="k">가점</div>
+            <div class="v">+${bonusPts}/${BONUS_CAP}</div>
+          </div>
+          <div class="kpi">
+            <div class="k">총점(기본)</div>
+            <div class="v">${totalBase}/100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if(top3.length === 0){
+    riskTop3.innerHTML = `<div class="muted">미충족 핵심 항목이 거의 없습니다. (현 상태 기준)</div>`;
+  } else {
+    riskTop3.innerHTML = `
+      <ul>
+        ${top3.map(x=>`
+          <li><b>${escapeHtml(x.group)}</b> · ${escapeHtml(x.title)} <span class="muted">(미충족 · ${x.pts}점)</span></li>
+        `).join("")}
+      </ul>
+      <div class="muted" style="margin-top:10px;">
+        위 3개는 감점 폭이 큽니다. “있다”로 만들지 못하면, 점수는 안 올라갑니다.
+      </div>
+    `;
+  }
+
+  if(!fixes.length){
+    fixText.innerHTML = `<div class="muted">현재 입력 기준으로는 보완 문장이 필요하지 않거나, 대부분 충족 상태입니다.</div>`;
+  } else {
+    fixText.innerHTML = `
+      <ol>
+        ${fixes.map(f=>`<li>${escapeHtml(f)}</li>`).join("")}
+      </ol>
+      <div class="muted" style="margin-top:10px;">
+        문장만 붙이면 끝이 아닙니다. <b>증빙/수치/표</b>가 같이 들어가야 통과합니다.
+      </div>
+    `;
+  }
+}
+
+/** =========================
+ *  BUTTONS
+ *  ========================= */
+document.getElementById("btnCalc").addEventListener("click", calc);
+
+document.getElementById("btnReset").addEventListener("click", ()=>{
+  if(confirm("모든 체크를 초기화할까요?")){
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll("input[type=checkbox]").forEach(cb=>cb.checked=false);
+    // reset outputs
+    document.getElementById("scoreBlock").innerHTML =
+      `<div class="muted">아직 결과가 없습니다. 왼쪽 체크 후 <b>심사 결과 확인</b>을 누르세요.</div>`;
+    document.getElementById("riskTop3").innerHTML =
+      `<div class="muted">미충족 핵심 근거가 자동으로 표시됩니다.</div>`;
+    document.getElementById("fixText").innerHTML =
+      `<div class="muted">점수가 낮은 항목 기준으로 “바로 붙여넣을 문장”을 자동 제안합니다.</div>`;
+  }
+});
+
+document.getElementById("btnPrint").addEventListener("click", ()=>{
+  // 결과가 비어있으면 자동 계산 후 인쇄
+  const hasBig = document.querySelector("#scoreBlock .big");
+  if(!hasBig) calc();
+  window.print();
+});
+
+// init
+render();
+</script>
+</body>
+</html>
